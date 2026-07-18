@@ -1,0 +1,114 @@
+.kanbanContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.kanbanHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kanbanHeader h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.kanbanForm {
+  display: flex;
+  gap: 12px;
+}
+
+.kanbanForm input {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  min-width: 240px;
+  transition: all 0.2s;
+}
+
+.kanbanForm input:focus {
+  border-color: var(--accent);
+}
+
+.kanbanForm button {
+  background-color: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.kanbanForm button:hover {
+  background-color: var(--accent-hover);
+}
+
+.kanbanGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.kanbanColumn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 500px;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
+}
+
+.kanbanColumn h3 {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.kanbanCard {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: grab;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.kanbanCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.kanbanCard h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.kanbanCard p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.kanbanEmpty {
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
