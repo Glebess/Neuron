@@ -1,0 +1,74 @@
+.kanbanCard {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  border-radius: 6px;
+  padding: 14px;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.cardActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.kanbanCard:hover {
+  box-shadow: 0 4px 6px -1px #6366f1;
+}
+
+.kanbanCard h4 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  color: #6366f1;
+}
+
+.kanbanCard p {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.cardActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.cardActions button {
+  padding: 4px 8px;
+  font-size: 11px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.skipBtn {
+  background-color: #edf2f7;
+  color: #4a5568;
+}
+.skipBtn:hover {
+  background-color: #e2e8f0;
+}
+
+.actionBtn {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+}
+.actionBtn:hover {
+  background-color: #cee8ff;
+}
+
+.archiveBtn {
+  background-color: #f7fafc;
+  color: #718096;
+  border-color: #e2e8f0;
+}
+.archiveBtn:hover {
+  background-color: #edf2f7;
+  color: #4a5568;
+}
