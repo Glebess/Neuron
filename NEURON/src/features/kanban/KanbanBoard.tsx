@@ -11,12 +11,14 @@ export const KanbanBoard = () => {
       title: "Изучить бэкенд",
       description: "Сделать каркас и доску на чистом CSS",
       status: "todo",
+      tags: ["test", "test1"],
     },
     {
       id: "2",
       title: "Разметка Neuron",
       description: "Сделать каркас и доску на чистом CSS",
       status: "in-progress",
+      tags: ["test2", "test3"],
     },
   ]);
 
@@ -36,6 +38,7 @@ export const KanbanBoard = () => {
       title: title.trim(),
       description: "",
       status: "todo",
+      tags: [],
     };
 
     setTasks((prev) => [...prev, newTask]);
@@ -65,18 +68,7 @@ export const KanbanBoard = () => {
           </button>
         </div>
 
-        <form onSubmit={handleAddTask} className={styles.kanbanForm}>
-          <input
-            type="text"
-            placeholder="Новая задача..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <button type="submit" className={styles.submitBtn}>
-            Добавить
-          </button>
-        </form>
+        <button className={styles.newTaskBtn}>Новая задача +</button>
       </header>
 
       <div className={styles.kanbanGrid}>
@@ -103,7 +95,6 @@ export const KanbanBoard = () => {
         />
       </div>
 
-      {/* Модалка открывается по клику, передаем только задачу и закрытие */}
       {activeTaskForModal && (
         <SettingsModal
           task={activeTaskForModal}

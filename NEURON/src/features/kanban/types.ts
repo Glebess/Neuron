@@ -3,6 +3,7 @@ export interface Task {
   title: string;
   description: string;
   status: "later" | "todo" | "in-progress" | "done" | "archived";
+  tags: string[];
 }
 
 export interface KanbanColumnProps {
