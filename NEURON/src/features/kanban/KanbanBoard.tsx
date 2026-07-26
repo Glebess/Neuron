@@ -1,15 +1,15 @@
-import { useState } from "react";
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import styles from "./Kanban.module.css";
 import type { Task } from "./types";
 import { KanbanColumn } from "./components/KanbanColumn";
+import SettingsModal from "./components/SettingsModal";
 
 export const KanbanBoard = () => {
   const [tasks, setTasks] = useState<Task[]>([
     {
       id: "1",
       title: "Изучить бэкенд",
-      description: "Разведать Express и Prisma для проекта",
+      description: "Сделать каркас и доску на чистом CSS",
       status: "todo",
     },
     {
@@ -20,8 +20,11 @@ export const KanbanBoard = () => {
     },
   ]);
 
+  const [activeTaskForModal, setActiveTaskForModal] = useState<Task | null>(
+    null,
+  );
+
   const [title, setTitle] = useState("");
-  // Стейт для отображения скрытого бэклога "Позже"
   const [showLater, setShowLater] = useState(false);
 
   const handleAddTask = (e: FormEvent) => {
@@ -54,7 +57,6 @@ export const KanbanBoard = () => {
       <header className={styles.kanbanHeader}>
         <div className={styles.headerLeft}>
           <h2>Доска задач</h2>
-          {/* Кнопка-переключатель для бэклога */}
           <button
             className={styles.laterToggleBtn}
             onClick={() => setShowLater(!showLater)}
@@ -77,48 +79,37 @@ export const KanbanBoard = () => {
         </form>
       </header>
 
-      {/* Выпадающая панель для задач "Позже" */}
-      {showLater && (
-        <div className={styles.laterPanel}>
-          <h3>Сделать позже</h3>
-          {laterTasks.length === 0 ? (
-            <p className={styles.emptyText}>Нет отложенных задач</p>
-          ) : (
-            <div className={styles.laterList}>
-              {laterTasks.map((task) => (
-                <div key={task.id} className={styles.laterItem}>
-                  <span>{task.title}</span>
-                  <button onClick={() => moveToStatus(task.id, "todo")}>
-                    В план
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Сетка теперь строго из 3 колонок — адаптируется на 100% ширины */}
       <div className={styles.kanbanGrid}>
         <KanbanColumn
           title="Нужно сделать"
           status="todo"
           tasks={tasks.filter((t) => t.status === "todo")}
           onMoveStatus={moveToStatus}
+          onOpenSettings={(task) => setActiveTaskForModal(task)}
         />
         <KanbanColumn
           title="В работе"
           status="in-progress"
           tasks={tasks.filter((t) => t.status === "in-progress")}
           onMoveStatus={moveToStatus}
+          onOpenSettings={(task) => setActiveTaskForModal(task)}
         />
         <KanbanColumn
           title="Готово"
           status="done"
           tasks={tasks.filter((t) => t.status === "done")}
           onMoveStatus={moveToStatus}
+          onOpenSettings={(task) => setActiveTaskForModal(task)}
         />
       </div>
+
+      {/* Модалка открывается по клику, передаем только задачу и закрытие */}
+      {activeTaskForModal && (
+        <SettingsModal
+          task={activeTaskForModal}
+          onClose={() => setActiveTaskForModal(null)}
+        />
+      )}
     </div>
   );
 };

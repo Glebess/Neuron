@@ -8,20 +8,59 @@
     transform 0.15s,
     box-shadow 0.15s;
 }
-
+.kanbanCard:hover .cardActions {
+  opacity: 1;
+  pointer-events: auto;
+}
 .cardActions {
   display: flex;
   justify-content: flex-end;
   gap: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
+
+.cardActions button {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardActions button:hover {
+  color: var(--accent);
+}
+
+/* вращение кнопки настроек задачи */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.settingsBtn:hover svg {
+  animation: spin 2s linear infinite;
+  color: var(--accent);
+}
+
 .kanbanCard:hover {
-  box-shadow: 0 4px 6px -1px #6366f1;
+  box-shadow: 0 4px 6px -1px var(--accent);
 }
 
 .kanbanCard h4 {
   margin: 0 0 8px 0;
   font-size: 15px;
-  color: #6366f1;
+  color: var(--accent);
 }
 
 .kanbanCard p {
