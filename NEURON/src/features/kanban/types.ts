@@ -3,7 +3,7 @@ export interface Task {
   title: string;
   description: string;
   status: "later" | "todo" | "in-progress" | "done" | "archived";
-  tags: string[];
+  tags?: Tag;
 }
 
 export interface KanbanColumnProps {
@@ -22,4 +22,10 @@ export interface KanbanCardProps {
 export interface SettingsModalProps {
   task: Task;
   onClose: () => void;
+}
+
+export interface Tag {
+  id: string;
+  name: string;
+  color: string;
 }

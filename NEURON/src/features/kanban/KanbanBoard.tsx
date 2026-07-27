@@ -3,6 +3,7 @@ import styles from "./Kanban.module.css";
 import type { Task } from "./types";
 import { KanbanColumn } from "./components/KanbanColumn";
 import SettingsModal from "./components/SettingsModal";
+import TopPanel from "./components/TopPanel/TopPanel";
 
 export const KanbanBoard = () => {
   const [tasks, setTasks] = useState<Task[]>([
@@ -27,7 +28,6 @@ export const KanbanBoard = () => {
   );
 
   const [title, setTitle] = useState("");
-  const [showLater, setShowLater] = useState(false);
 
   const handleAddTask = (e: FormEvent) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ export const KanbanBoard = () => {
       title: title.trim(),
       description: "",
       status: "todo",
-      tags: [],
+      tags: [null],
     };
 
     setTasks((prev) => [...prev, newTask]);
@@ -53,21 +53,13 @@ export const KanbanBoard = () => {
     );
   };
 
-  const laterTasks = tasks.filter((t) => t.status === "later");
-
   return (
     <div className={styles.kanbanContainer}>
       <header className={styles.kanbanHeader}>
         <div className={styles.headerLeft}>
           <h2>Доска задач</h2>
-          <button
-            className={styles.laterToggleBtn}
-            onClick={() => setShowLater(!showLater)}
-          >
-            Отложенные ({laterTasks.length})
-          </button>
         </div>
-
+        <TopPanel />
         <button className={styles.newTaskBtn}>Новая задача +</button>
       </header>
 
