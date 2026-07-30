@@ -2,10 +2,14 @@ import { useState } from "react";
 import styles from "./SettingsModal.module.css";
 import type { SettingsModalProps, Task } from "../types";
 
-const SettingsModal = ({ task, onClose }: SettingsModalProps) => {
-  const [title, setTitle] = useState(task.title);
-  const [description, setDescription] = useState(task.description || "");
-  const [status, setStatus] = useState<Task["status"]>(task.status);
+const SettingsModal = ({ task, onClose, onSave }: SettingsModalProps) => {
+  // Оставляем только один стейт для всей задачи целиком
+  const [editedTask, setEditedTask] = useState<Task>({ ...task });
+
+  const handleSave = () => {
+    onSave(editedTask);
+  };
+
   return (
     <div className={styles.modalcontainer} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -14,20 +18,29 @@ const SettingsModal = ({ task, onClose }: SettingsModalProps) => {
         <div className={styles.modalForm}>
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={editedTask.title}
+            onChange={(e) =>
+              setEditedTask({ ...editedTask, title: e.target.value })
+            }
             placeholder="Название задачи..."
           />
           <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={editedTask.description}
+            onChange={(e) =>
+              setEditedTask({ ...editedTask, description: e.target.value })
+            }
             placeholder="Описание задачи..."
           />
         </div>
 
         <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value as Task["status"])}
+          value={editedTask.status}
+          onChange={(e) =>
+            setEditedTask({
+              ...editedTask,
+              status: e.target.value as Task["status"],
+            })
+          }
           className={styles.modalSelect}
         >
           <option value="later">Отложенные</option>
@@ -37,7 +50,9 @@ const SettingsModal = ({ task, onClose }: SettingsModalProps) => {
         </select>
 
         <div className={styles.modalActions}>
-          <button className={styles.saveBtn}>Сохранить</button>
+          <button onClick={handleSave} className={styles.saveBtn}>
+            Сохранить
+          </button>
           <button onClick={onClose} className={styles.cancelBtn}>
             Отмена
           </button>

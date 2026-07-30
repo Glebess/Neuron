@@ -1,6 +1,6 @@
 import styles from "../Kanban.module.css";
 import type { KanbanColumnProps } from "../types";
-import { KanbanCard } from "./KanbanCard";
+import { KanbanCard } from "./kanbanCard/KanbanCard";
 
 export const KanbanColumn = ({
   title,

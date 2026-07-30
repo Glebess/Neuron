@@ -56,7 +56,10 @@
   color: var(--text-main, #ffffff);
   font-weight: 500;
 }
-
+.action_container {
+  display: flex;
+  gap: 6px;
+}
 .settingsBtn {
   background: transparent;
   border: none;

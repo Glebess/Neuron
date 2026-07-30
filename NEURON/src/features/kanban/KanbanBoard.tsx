@@ -41,6 +41,12 @@ export const KanbanBoard = () => {
       ),
     );
   };
+  const onSaveTask = (updatedTask: Task) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
+    );
+    setActiveTaskForModal(null);
+  };
 
   return (
     <div className={styles.kanbanContainer}>
@@ -74,6 +80,7 @@ export const KanbanBoard = () => {
         <SettingsModal
           task={activeTaskForModal}
           onClose={() => setActiveTaskForModal(null)}
+          onSave={onSaveTask}
         />
       )}
     </div>
