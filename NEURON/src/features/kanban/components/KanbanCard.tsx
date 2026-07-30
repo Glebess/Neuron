@@ -17,8 +17,12 @@ export const KanbanCard = ({ task, onOpenSettings }: KanbanCardProps) => {
         <div className={styles.tagsContainer}>
           {task.tags &&
             task.tags.map((tag) => (
-              <span key={tag} className={styles.tag}>
-                {tag}
+              <span
+                key={tag.id}
+                className={styles.tag}
+                style={{ backgroundColor: tag.color }}
+              >
+                {tag.name}
               </span>
             ))}
         </div>

@@ -6,17 +6,6 @@ const SettingsModal = ({ task, onClose }: SettingsModalProps) => {
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description || "");
   const [status, setStatus] = useState<Task["status"]>(task.status);
-
-  //   const handleSaveClick = () => {
-  //     if (!title.trim()) return;
-  //     onSave({
-  //       ...task,
-  //       title: title.trim(),
-  //       description: description.trim(),
-  //       status,
-  //     });
-  //   };
-
   return (
     <div className={styles.modalcontainer} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>

@@ -1,0 +1,59 @@
+.kanbanHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.action_container {
+  display: flex;
+  gap: 6px;
+}
+.taskDone {
+  display: flex;
+  gap: 6px;
+  font-size: 20px;
+  color: var(--text-main);
+}
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-card);
+  padding: 8px 10px 8px 10px;
+  border-radius: 10px;
+  gap: 6px;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  transition: 0.3s ease;
+}
+.action:hover {
+  border-color: var(--accent);
+  cursor: pointer;
+}
+.newTaskBtn {
+  padding: 11px 10px 11px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: var(--accent);
+  color: white;
+  border: 0;
+  gap: 6px;
+}
+.newTaskBtn:hover {
+  cursor: pointer;
+}
+/* .headerLeft h2 {
+  font-size: 28px;
+  color: var(--text-main);
+  margin: 0;
+} */

@@ -1,9 +1,9 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import styles from "./Kanban.module.css";
 import type { Task } from "./types";
 import { KanbanColumn } from "./components/KanbanColumn";
 import SettingsModal from "./components/SettingsModal";
-import TopPanel from "./components/TopPanel/TopPanel";
+import KanbanHeader from "./components/kanbanHeader/KanbanHeader";
 
 export const KanbanBoard = () => {
   const [tasks, setTasks] = useState<Task[]>([
@@ -12,38 +12,27 @@ export const KanbanBoard = () => {
       title: "Изучить бэкенд",
       description: "Сделать каркас и доску на чистом CSS",
       status: "todo",
-      tags: ["test", "test1"],
+
+      tags: [
+        { id: "t1", name: "test", color: "#ef4444" },
+        { id: "t2", name: "test1", color: "#3b82f6" },
+      ],
     },
     {
       id: "2",
       title: "Разметка Neuron",
       description: "Сделать каркас и доску на чистом CSS",
       status: "in-progress",
-      tags: ["test2", "test3"],
+      tags: [
+        { id: "t3", name: "test2", color: "#10b981" },
+        { id: "t4", name: "test3", color: "#f59e0b" },
+      ],
     },
   ]);
 
   const [activeTaskForModal, setActiveTaskForModal] = useState<Task | null>(
     null,
   );
-
-  const [title, setTitle] = useState("");
-
-  const handleAddTask = (e: FormEvent) => {
-    e.preventDefault();
-    if (!title.trim()) return;
-
-    const newTask: Task = {
-      id: crypto.randomUUID(),
-      title: title.trim(),
-      description: "",
-      status: "todo",
-      tags: [null],
-    };
-
-    setTasks((prev) => [...prev, newTask]);
-    setTitle("");
-  };
 
   const moveToStatus = (id: string, newStatus: Task["status"]) => {
     setTasks((prev) =>
@@ -55,13 +44,7 @@ export const KanbanBoard = () => {
 
   return (
     <div className={styles.kanbanContainer}>
-      <header className={styles.kanbanHeader}>
-        <div className={styles.headerLeft}>
-          <h2>Доска задач</h2>
-        </div>
-        <TopPanel />
-        <button className={styles.newTaskBtn}>Новая задача +</button>
-      </header>
+      <KanbanHeader tasks={tasks} />
 
       <div className={styles.kanbanGrid}>
         <KanbanColumn
