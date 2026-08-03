@@ -1,11 +1,17 @@
 import { useState } from "react";
 import styles from "./SettingsModal.module.css";
-import type { SettingsModalProps, Task } from "../types";
+import type { SettingsModalProps, Task } from "../../types";
 
-const SettingsModal = ({ task, onClose, onSave }: SettingsModalProps) => {
+const SettingsModal = ({
+  task,
+  title,
+  onClose,
+  onSave,
+}: SettingsModalProps) => {
   // Оставляем только один стейт для всей задачи целиком
   const [editedTask, setEditedTask] = useState<Task>({ ...task });
 
+  const isNewTask = task.title === "";
   const handleSave = () => {
     onSave(editedTask);
   };
@@ -13,7 +19,7 @@ const SettingsModal = ({ task, onClose, onSave }: SettingsModalProps) => {
   return (
     <div className={styles.modalcontainer} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <h2>Редактирование задачи</h2>
+        <h2>{title}</h2>
 
         <div className={styles.modalForm}>
           <input

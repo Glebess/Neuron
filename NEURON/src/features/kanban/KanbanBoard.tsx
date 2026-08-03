@@ -2,8 +2,13 @@ import { useState } from "react";
 import styles from "./Kanban.module.css";
 import type { Task } from "./types";
 import { KanbanColumn } from "./components/KanbanColumn";
-import SettingsModal from "./components/SettingsModal";
+import SettingsModal from "./components/modalTask/SettingsModal";
 import KanbanHeader from "./components/kanbanHeader/KanbanHeader";
+
+//функция генерации id
+const generateUniqueId = () => {
+  return Math.random().toString(36).substring(2, 9);
+};
 
 export const KanbanBoard = () => {
   const [tasks, setTasks] = useState<Task[]>([
@@ -30,6 +35,17 @@ export const KanbanBoard = () => {
     },
   ]);
 
+  const handleCreateNewTask = () => {
+    const emptyTask: Task = {
+      id: generateUniqueId(),
+      title: "",
+      description: "",
+      status: "todo",
+      tags: [],
+    };
+    setActiveTaskForModal(emptyTask);
+  };
+
   const [activeTaskForModal, setActiveTaskForModal] = useState<Task | null>(
     null,
   );
@@ -42,15 +58,27 @@ export const KanbanBoard = () => {
     );
   };
   const onSaveTask = (updatedTask: Task) => {
-    setTasks((prev) =>
-      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
-    );
+    setTasks((prev) => {
+      // Проверка, существует ли уже такая задача на доске
+      const taskExists = prev.some((task) => task.id === updatedTask.id);
+
+      if (taskExists) {
+        // Если существует (редактирование) заменяет
+        return prev.map((task) =>
+          task.id === updatedTask.id ? updatedTask : task,
+        );
+      } else {
+        // Если не существует (новая) добавляет в конец массива
+        return [...prev, updatedTask];
+      }
+    });
+
     setActiveTaskForModal(null);
   };
 
   return (
     <div className={styles.kanbanContainer}>
-      <KanbanHeader tasks={tasks} />
+      <KanbanHeader tasks={tasks} onNewTask={handleCreateNewTask} />
 
       <div className={styles.kanbanGrid}>
         <KanbanColumn
@@ -81,6 +109,7 @@ export const KanbanBoard = () => {
           task={activeTaskForModal}
           onClose={() => setActiveTaskForModal(null)}
           onSave={onSaveTask}
+          title="Редактирование задачи"
         />
       )}
     </div>

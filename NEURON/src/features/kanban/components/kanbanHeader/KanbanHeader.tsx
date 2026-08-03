@@ -2,7 +2,7 @@ import styles from "./kanbanHeader.module.css";
 import { Tags, Pause, Search, Plus } from "lucide-react";
 import type { KanbanHeaderProps } from "../../types";
 
-const KanbanHeader = ({ tasks = [] }: KanbanHeaderProps) => {
+const KanbanHeader = ({ tasks = [], onNewTask }: KanbanHeaderProps) => {
   const completedTasks = tasks.filter((t) => t.status === "done").length;
   const totalTasks = tasks.length;
 
@@ -31,7 +31,7 @@ const KanbanHeader = ({ tasks = [] }: KanbanHeaderProps) => {
         </button>
       </div>
 
-      <button className={styles.newTaskBtn}>
+      <button className={styles.newTaskBtn} onClick={onNewTask}>
         <Plus size={18} />
         Добавить задачу
       </button>
