@@ -21,7 +21,6 @@ export interface KanbanCardProps {
 }
 export interface SettingsModalProps {
   task: Task;
-  title: string;
   onClose: () => void;
   onSave: (updateTask: Task) => void;
 }

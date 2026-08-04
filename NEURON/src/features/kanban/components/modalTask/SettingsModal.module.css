@@ -40,6 +40,15 @@
   width: 100%;
   resize: none;
 }
+.inputError {
+  border-color: #ef4444 !important;
+}
+.errorMessage {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 0;
+  margin-left: 2px;
+}
 .modalSelect option {
   background-color: var(--bg-main, #1e1e1e);
   color: var(--text-main, #fff);
@@ -69,6 +78,14 @@
   cursor: pointer;
   font-weight: 500;
 }
+.saveBtn:disabled {
+  background-color: transparent;
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+  border: 1px solid var(--text-muted);
+}
+
 .cancelBtn {
   padding: 8px 16px;
   border-radius: 8px;

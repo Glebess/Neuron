@@ -109,7 +109,6 @@ export const KanbanBoard = () => {
           task={activeTaskForModal}
           onClose={() => setActiveTaskForModal(null)}
           onSave={onSaveTask}
-          title="Редактирование задачи"
         />
       )}
     </div>
